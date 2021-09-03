@@ -1,24 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
+import { Container } from "@chakra-ui/react"
+import {ErrorBoundary} from "./components/ErrorBoundary/ErrorBoundary";
+import RickMortyContainer from "./containers/RickMortyContainer";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <ErrorBoundary>
+        <Container maxW="container.lg" my={"30px"} pt={"20px"}>
+          <RickMortyContainer />
+        </Container>
+      </ErrorBoundary>
   );
 }
 
