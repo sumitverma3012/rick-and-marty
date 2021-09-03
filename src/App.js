@@ -3,7 +3,6 @@ import { Container } from "@chakra-ui/react"
 import {ErrorBoundary} from "./components/ErrorBoundary/ErrorBoundary";
 import RickMortyContainer from "./containers/RickMortyContainer";
 
-
 function App() {
   return (
       <ErrorBoundary>

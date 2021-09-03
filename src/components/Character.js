@@ -1,5 +1,5 @@
 import {Box, Heading, Image, Button, Divider, Tooltip, Icon, useDisclosure, Skeleton} from '@chakra-ui/react';
-import {characterStatus, characterGender} from "../utils/styleMap";
+import {characterStatus, characterGender} from "../utils/util";
 import {useRef, useState} from "react";
 import EpisodesList from "./EpisodesList";
 
@@ -9,7 +9,7 @@ const Character = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [showEpisodes, setShowEpisodes] = useState(false);
     const btnRef = useRef()
-    const {name, status, species, type, gender, image, location, episode } = props.details;
+    const {name, status, species, type, gender, image, location, episode, origin } = props.details;
 
     const handleClick = () => {
         setShowEpisodes(true);
@@ -24,15 +24,12 @@ const Character = (props) => {
 
     return (
         <Box
-            data-testid="character-item"
-            borderWidth="1px"
+            borderWidth="2px"
             rounded="lg"
             overflow="hidden"
             shadow="md"
             transition="0.3s all"
-            _hover={{
-                transform: 'scale(1.02)'
-            }}
+            _hover={{transform: 'scale(1.02)'}}
             backgroundColor={"#fff"}
         >
             {!loaded ? <Skeleton height="300px" /> : null}
@@ -106,7 +103,18 @@ const Character = (props) => {
                 <Button width="100%" size="md" mt="10px" alignSelf="flex-end" ref={btnRef} colorScheme="teal" onClick={handleClick}>
                     Details
                 </Button>
-                {showEpisodes && <EpisodesList isOpen={isOpen} onClose={handleClose} btnRef={btnRef} episode={episode} name={name}/>}
+                {showEpisodes &&
+                    <EpisodesList
+                        isOpen={isOpen}
+                        onClose={handleClose}
+                        btnRef={btnRef}
+                        episode={episode}
+                        name={name}
+                        locationURL={location.url}
+                        originURL={origin.url}
+                        avatarUrl={image}
+                    />
+                }
             </Box>
         </Box>
     )
